@@ -1,0 +1,320 @@
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block title %}Flasky{% endblock %} {% block page_content %}
+<html>
+
+<head>
+    <title>ProPlan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Sacramento&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center p-5">
+
+                     <h1 style="font-family: 'Sacramento', cursive; font-size: 36px; display: inline; ">ProPlan </h1>
+                    <img class="mb-1" src="{{ url_for('static', filename='images/brand2.jpg') }}" style="height: 60px;" />
+            </div>
+        </div>
+
+
+        <div class="row pb-5 mb-5 text-center" style="font-family: 'Cormorant', serif;">
+
+
+            <div class="col-md-3" >
+                <h1  class="m-4 mb-4 p-2 rounded" style="background-color: #F3C2BC; width: 218px;">This Year’s Goals</h1 >
+
+                <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                           Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h1 class="m-4 p-2 rounded" style="background-color: #AED6DC; width: 218px;">This Month’s Goals</h1>
+                <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #F7DDB5; width: 218px;">This Week’s Goals</h1>
+
+                <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-1 .d-none .d-sm-block" style=" border-left: 1px solid gray; height: 700px;">
+
+            </div>
+
+            <div class="col-md-2 pull-left" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Weekly To-do</h1>
+
+                <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row pt-5 pb-5 mt-5 text-center d-flex justify-content-center" style="font-family: 'Cormorant', serif;">
+
+            <div class="col-1 .d-none .d-sm-block" style=" border-left: 1px solid gray; height: 700px; left: 68px; ">
+
+            </div>
+
+            <div class="col-2" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Weekly To-do</h1>
+
+                <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3 offset-1" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Daily To-Do</h1>
+
+                <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Future To-Do</h1>
+
+                <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-2" >
+
+                <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Notes/Memos</h1>
+
+                <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
+                    <div class="card-title">
+                        <! --Delete -->
+                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
+                        </button>
+                    </div>
+                    <div class="card-body" style="font-size: 20px;">
+
+                        <li>
+                            Test
+                            <button type="button" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </li>
+
+                        <! --
+                        {% for object in object %}
+                        <li>
+                            {{ object.name }}
+                        </li><button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                        {% endfor %}
+                        -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+{% endblock %}

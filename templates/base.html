@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}ProPlan{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='images/brand.jpg') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='images/brand.jpg') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-expand-lg navbar-light bg-info" role="navigation">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <a class="navbar-brand text-white mt-3"
+                  style="font-size: 20px" href="/">ProPlan</a>
+                <li><a class="text-white"  style="font-size: 15px" href="/">Home</a></li>
+            </ul>
+        </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
