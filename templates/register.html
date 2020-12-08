@@ -1,0 +1,107 @@
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block title %}Register{% endblock %} {% block page_content %}
+<head>
+    <title>ProPlan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Sacramento&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="row pb-5 mb-5 text-center offset-3" style="font-family: 'Cormorant', serif;">
+
+    <div class="col-md-4" >
+        <h1  class="m-4 mb-4 p-2 ml-auto mr-auto rounded offset-3" style="background-color: #F3C2BC; width: 700px; font-size: 35px">Register</h1 >
+
+        <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; width:700px;">
+
+            <div class="card-body text-center justify-content-center" style="font-size: 20px;">
+
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group m-5">
+
+                        <div class="form-group ml-5 mr-5 row">
+
+                            {{ form.username.label(class="form-control-label") }}
+
+                            {% if form.username.errors %}
+                            {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.username(class="form-control form-control-lg") }}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="form-group ml-5 mr-5 row">
+                            {{ form.email.label(class="form-control-label") }}
+                            {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group ml-5 mr-5 row">
+                            {{ form.password.label(class="form-control-label") }}
+                            {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group ml-5 mr-5 row">
+                            {{ form.confirm_password.label(class="form-control-label") }}
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.confirm_password(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+
+                    </fieldset>
+
+                    <div class="form-group ml-5 mr-5 row">
+                        <div class="col-12">
+
+                            {{ form.submit(class="btn btn-info btn-lg") }}
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="pt-3">
+                    <small class="text-muted">
+                        Already have an account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+{% endblock %}
