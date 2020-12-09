@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block title %}Login{% endblock %} {% block page_content %}
+<head>
+    <title>ProPlan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant&family=Sacramento&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+<div class="row pb-5 mb-5 text-center offset-3" style="font-family: 'Cormorant', serif;">
+
+    <img/>
+
+    <div class="col-md-4" >
+        <h1  class="m-4 mb-4 p-2 ml-auto mr-auto rounded offset-3" style="background-color: #AED6DC; width: 700px; font-size: 35px">Your Account</h1 >
+
+        <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; width:700px;">
+
+            <div class="card-body text-center justify-content-center" style="font-size: 20px;">
+
+                <div class="row">
+                    <div class="col-4">
+                        <h1 style="font-weight: bold">Username :</h1>
+                    </div>
+
+                    <div class="col-8">
+                        <h2>{{ current_user.username }}</h2>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <h1 style="font-weight: bold">Email :</h1>
+                    </div>
+
+                    <div class="col-8">
+                        <h2>{{ current_user.email }}</h2>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+{% endblock %}
