@@ -38,6 +38,7 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
 class Tasks(db.Model):
+    __tablename__ = 'task'
     id = db.Column(db.Integer, primary_key=True)
     year_goal = db.Column(db.String(200))
     month_goal = db.Column(db.String(200))
@@ -49,7 +50,9 @@ class Tasks(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-            return f"Tasks()"
+            # return f"Tasks()"
+            return '<Name %r' %self.id
+
 
 
 
@@ -91,6 +94,22 @@ def internal_server_error(e):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
+    if request.method == "POST":
+        task_name = request.form['year_goal']
+        new_task = Tasks(year_goal=task_name)
+
+        # push to database
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except: 
+            return "There was an error adding your list item"
+
+    else:
+        tasks= Tasks.query.order_by(Tasks.year_goal)
+        return render_template("index.html", title=title, tasks=tasks)
 
 
 @app.route('/register', methods=['GET', 'POST'])
