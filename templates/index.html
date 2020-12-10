@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block title %}ProPlan{% endblock %} {% block page_content %}
+{% extends "base.html" %} 
+{% import "bootstrap/wtf.html" as wtf %} 
+{% block title %}ProPlan{% endblock %} 
+{% block page_content %}
 <html>
 
 <head>
@@ -41,16 +44,25 @@
 
                             <div>
                                 <form action="/" METHOD="POST">
-                                    <input class="form-control form-control-sm" type="text " placeholder="Task" name="task"> 
+                                    <input class="form-control form-control-sm" type="text " placeholder="Task" name="weeklytask"> 
+                                    <br>
                                     <input type="submit" value="Add Task" class="btn btn-info">
+                                    <br>
                                 </form>
-                        
-                                        {% for task in task %}
+                                <br>
+                                <br>
+                                {% for list in lists %}
                                     <li>
-                                        {{ task.year_goal }}
+                                        {{ list.weeklytask }}
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
                                     </li>
-                                        {% endfor %}
-                                
+
+                                {% endfor %}
                             
 
                             </div>
@@ -99,10 +111,15 @@
                         <div class="card-body" style="font-size: 20px;">
 
                             <div>
-                                <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
-                                <input type="submit" value="Add Task" class="btn btn-info">
+                                <form action="/" METHOD="POST">
+                                    <input class="form-control form-control-sm" type="text " placeholder="Task">
+                                    <br>
+                                    <input type="submit" value="Add Task" class="btn btn-info">
+                                    <br>
+                                </form>
                             </div>
-
+                            <br>
+                            <br>
                             <ul>
                                 <li>
                                     Test

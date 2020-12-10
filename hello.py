@@ -9,10 +9,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import LoginManager, UserMixin, login_user, current_user, logout_user, login_required
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///lists.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -26,6 +28,19 @@ moment = Moment(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class Lists(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    weeklytask = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    
+
+
+    def __repr__(self):
+        return f"Lists()"
+        # return f"Lists('{self.weeklytask}','{self.monthlytask}')"
+        # return'<Weeklytask %r' %self.id
+        # return'<Monthlytask %r' %self.id
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -37,9 +52,11 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
+# create db Model
 class Tasks(db.Model):
     __tablename__ = 'task'
     id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
     year_goal = db.Column(db.String(200))
     month_goal = db.Column(db.String(200))
     weekly_goal = db.Column(db.String(200))
@@ -51,9 +68,7 @@ class Tasks(db.Model):
 
     def __repr__(self):
             # return f"Tasks()"
-            return '<Name %r' %self.id
-
-
+            return '<year_goal %r>' %self.id
 
 
 class RegistrationForm(FlaskForm):
@@ -91,25 +106,34 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html')
-
     if request.method == "POST":
-        task_name = request.form['year_goal']
-        new_task = Tasks(year_goal=task_name)
+        if 'weeklytask' in request.form:
+            weeklytask = request.form['weeklytask']
+            new_weeklytask = Lists(weeklytask=weeklytask)
 
-        # push to database
-        try:
-            db.session.add(new_task)
-            db.session.commit()
-            return redirect('/')
-        except: 
-            return "There was an error adding your list item"
+            try:
+                db.session.add(new_weeklytask)
+                db.session.commit()
+                return redirect('/')
+            except: 
+                return "There was an error adding your list item"
+        elif 'monthlytask' in request.form:
+            monthytask = request.form['monthlytask']
+            new_monthlytask = Lists(monthlytask=monthlytask)
+
+            try:
+                db.session.add(new_monthlytask)
+                db.session.commit()
+                return redirect('/')
+            except: 
+                return "There was an error adding your list item"
+        else: return render_template("index.html", lists=lists)
 
     else:
-        tasks= Tasks.query.order_by(Tasks.year_goal)
-        return render_template("index.html", title=title, tasks=tasks)
+        lists = Lists.query.order_by(Lists.date_created)
+        return render_template("index.html", lists=lists)
 
 
 @app.route('/register', methods=['GET', 'POST'])
