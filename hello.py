@@ -18,6 +18,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///weeklygoals.db'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///lists.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -32,13 +33,25 @@ moment = Moment(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class Lists(db.Model):
+class Weeklygoals(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    weeklytask = db.Column(db.String(200), nullable=False)
+    Weeklygoals = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+    def __repr__(self):
+        return f"Weeklygoals()"
 
+class Lists(db.Model):
+    #  __tablename__ = 'lists'
+    id = db.Column(db.Integer, primary_key=True)
+    yearlygoals = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # id = db.Column(db.Integer, primary_key=True)
+    # date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    # tableName = db.Column(db.String(300))
+    # notes =  db.Column(db.String(200))
     def __repr__(self):
         return f"Lists()"
         # return f"Lists('{self.weeklytask}','{self.monthlytask}')"
@@ -51,23 +64,31 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
-    tasks = db.relationship('Tasks', backref='author', lazy=True)
+    lists = db.relationship('Lists', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
-# create db Model
-class Tasks(db.Model):
-    __tablename__ = 'task'
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    year_goal = db.Column(db.String(200))
-    month_goal = db.Column(db.String(200))
-    weekly_goal = db.Column(db.String(200))
-    weekly_todo = db.Column(db.String(200))
-    daily_todo = db.Column(db.String(200))
-    future_todo = db.Column(db.String(200))
-    notes =  db.Column(db.String(200))
+# class Tasks(db.Model):
+#     __tablename__ = 'task'
+#     id = db.Column(db.Integer, primary_key=True)
+#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+#     # year_goal = db.Column(db.String(200))
+#     # month_goal = db.Column(db.String(200))
+#     # weekly_goal = db.Column(db.String(200))
+#     # weekly_todo = db.Column(db.String(200))
+#     # daily_todo = db.Column(db.String(200))
+#     # future_todo = db.Column(db.String(200))
+#     tableName = db.Column(db.String(300))
+#     notes =  db.Column(db.String(200))
+
+# ||  ||  ||  ||  ||
+
+# 1 09/2019 Daily_TODO 'Brush Teeth'
+# 1 09/2019 Monthly_TODO 'Buy Tickets'
+# 2 09/2019 Monthly_TODO 'Buy Pencil'
+# 3 09/2019 Monthly_TODO 'Buy Spoon'
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
@@ -126,16 +147,20 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'), 500
 
+# Query the Tasks table to get all the tasks of the logged in user (match ID)
+# Query the Table obtained in step1 to get the tasks specific to the table name for each table ( i.e. query it 7 times for each table )
+# Display the result you get for each of the 7 queries in specific table in the front-end 
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == "POST":
-        if 'weeklytask' in request.form:
-            weeklytask = request.form['weeklytask']
-            new_weeklytask = Lists(weeklytask=weeklytask)
+        if 'yearlygoals' in request.form:
+            yearlygoals = request.form['yearlygoals']
+            new_yearlygoals = Lists(yearlygoals=yearlygoals)
 
             try:
-                db.session.add(new_weeklytask)
+                db.session.add(new_yearlygoals)
                 db.session.commit()
                 return redirect('/')
             except: 
