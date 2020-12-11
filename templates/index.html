@@ -35,15 +35,19 @@
                     <div class="card-body" style="font-size: 15px;">
 
                         <form action="/" METHOD="POST">
-                            <input type="text" placeholder="Ingredient" name="ingredient">
-                            <input type="submit" value="Add Ingredient" class="btn btn-primary">
+                            <br>
+                            <input type="text" placeholder="Yearly Goal" name="yearlygoal">
+                            <br>
+                            <br>
+                            <input type="submit" value="Add Goal" class="btn btn-info">
                         </form>
 
                         <br/>
-                        {% for ingredient in ingredients %}
+                        {% for yearlygoal in yearlygoals %}
                         <li>
-                            {{ ingredient.title }}
-
+                            {{ yearlygoal.title }}
+                            <a href="/delete/{{ yearlygoal.id }}" class="btn btn-default btn-sm">
+                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                         </li>
                         {% endfor %}
 
@@ -54,25 +58,23 @@
             <div class="col-md-4">
                 <h1 class="m-4 p-2 rounded" style="background-color: #AED6DC; width: 218px;">This Month’s Goals</h1>
                 <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
 
                         <form action="/" METHOD="POST">
-                            <input type="text" placeholder="Ingredient1" name="ingredient1">
-                            <input type="submit" value="Add Ingredient" class="btn btn-primary">
+                            <br>
+                            <input type="text" placeholder="Monthly Goal" name="monthlygoal">
+                            <br>
+                            <br>
+                            <input type="submit" value="Add Goal" class="btn btn-info">
                         </form>
 
                         <br/>
-                        {% for ingredient in ingredients1 %}
+                        {% for monthlygoal in monthlygoals %}
                         <li>
-                            {{ ingredient.title }}
-
+                            {{ monthlygoal.title }}
+                            <a href="/delete2/{{ monthlygoal.id }}" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                         </li>
                         {% endfor %}
                     </div>
@@ -84,43 +86,26 @@
                 <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #F7DDB5; width: 218px;">This Week’s Goals</h1>
 
                 <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
-                        <div>
-                            <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
-                            <input type="submit" value="Add Task" class="btn btn-info">
-                        </div>
+                    
+                            <form action="/" METHOD="POST">
+                                <br>
+                                <input type="text " placeholder="Weekly Goal" name="weeklygoal">
+                                <br>
+                                <br>
+                                <input type="submit" value="Add Goal" class="btn btn-info">
+                            </form>
+                        
 
-                        <ul>
+                            <br/>
+                            {% for weeklygoal in weeklygoals %}
                             <li>
-                                Test
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
+                                {{ weeklygoal.title }}
+                                <a href="/delete3/{{ weeklygoal.id }}" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                             </li>
-
-                            <! --
-                            {% for object in object %}
-                            <li>
-                                {{ object.name }}
-                            </li><button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
                             {% endfor %}
-                            -->
-                        </ul>
                     </div>
                 </div>
 
@@ -135,43 +120,28 @@
                 <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Weekly To-do</h1>
 
                 <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
-                            <input type="submit" value="Add Task" class="btn btn-info">
-                        </div>
+                            <form action="/" METHOD="POST">
+                                <br>
+                                <input type="text " placeholder="Weekly To-Do" name="weeklytodo">
+                                <br>
+                                <br>
+                                <input type="submit" value="Add Task" class="btn btn-info">
+                            </form>
 
-                        <ul>
+                            <br/>
+                            {% for weeklytodo in weeklytodos %}
                             <li>
-                                Test
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
+                                {{ weeklytodo.title }}
+                                <a href="/delete4/{{ weeklytodo.id }}" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                             </li>
-
-                            <! --
-                            {% for object in object %}
-                            <li>
-                                {{ object.name }}
-                            </li><button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
                             {% endfor %}
-                            -->
-                        </ul>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,43 +151,28 @@
                 <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Daily To-Do</h1>
 
                 <div class="card"  style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
-                            <input type="submit" value="Add Task" class="btn btn-info">
+                            <form action="/" METHOD="POST">
+                                <br>
+                                <input type="text " placeholder="Daily to-Do" name="dailytodo">
+                                <br>
+                                <br>
+                                <input type="submit" value="Add Task" class="btn btn-info">
+                                </form>
+
+                                <br/>
+                                {% for dailytodo in dailytodos %}
+                                <li>
+                                    {{ dailytodo.title }}
+                                    <a href="/delete5/{{ dailytodo.id }}" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
+                                </li>
+                                {% endfor %}
+                                
                         </div>
 
-                        <ul>
-                            <li>
-                                Test
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </li>
-
-                            <! --
-                            {% for object in object %}
-                            <li>
-                                {{ object.name }}
-                            </li><button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            {% endfor %}
-                            -->
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -227,43 +182,27 @@
                 <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Future To-Do</h1>
 
                 <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
+                        <form action="/" METHOD="POST">
+                            <br>
+                            <input type="text " placeholder="Task" name="futuretodo">
+                            <br>
+                            <br>
                             <input type="submit" value="Add Task" class="btn btn-info">
+
+                            <br/>
+                            {% for futuretodo in futuretodos %}
+                            <li>
+                                {{ futuretodo.title }}
+                                <a href="/delete6/{{ futuretodo.id }}" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
+                            </li>
+                            {% endfor %}
                         </div>
 
-                        <ul>
-                            <li>
-                                Test
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </li>
-
-                            <! --
-                            {% for object in object %}
-                            <li>
-                                {{ object.name }}
-                            </li><button type="button" class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            {% endfor %}
-                            -->
-                        </ul>
+                        
                     </div>
                 </div>
 
@@ -274,46 +213,28 @@
                 <h1 class="m-4 mb-4 p-2 rounded" style="background-color: #EAE2E1; width: 218px;">Notes/Memos</h1>
 
                 <div class="card" style="box-shadow:3px 3px 4px 0px #8c8c8c; height: 608px; width:243px;">
-                    <div class="card-title">
-                        <! --Delete -->
-                        <button type="button" class="btn btn-default m-3 btn-lg rounded" style="font-size: 15px; background-color: #F0F1F0">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete All
-                        </button>
-                    </div>
-                    <div class="card-body" style="font-size: 20px;">
+                    <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <input class="form-control form-control-sm" type="text " placeholder="Task" name="task">
-                            <input type="submit" value="Add Task" class="btn btn-info">
+                            <form action="/" METHOD="POST">
+                                <br>
+                                <input type="text " placeholder="Add note" name="memo">
+                                <br>
+                                <br>
+                                <input type="submit" value="Add note" class="btn btn-info">
+                                </form>
+
+                                <br/>
+                                {% for memo in memos %}
+                                <li>
+                                    {{ memo.title }}
+                                    <a href="/delete7/{{ memo.id }}" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
+                                </li>
+                                {% endfor %}
+                                
                         </div>
 
-                        <ul>
-                            <li>
-                                Test
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-
-                                <button type="button" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-
-                            </li>
-
-                            <! --
-                            {% for object in object %}
-                            <li>
-                                {{ object.name }}
-                            </li>
-                            <button type="button" class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                            {% endfor %}
-                            -->
-                        </ul>
                     </div>
                 </div>
 

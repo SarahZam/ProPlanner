@@ -18,8 +18,13 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///yearlygoal.db'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///monthlygoal.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///weeklylygoal.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///weeklytodo.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///dailytodo.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///futuretodo.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///memo.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///yearlygoal.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -59,6 +64,47 @@ class Monthly_Tasks(db.Model):
 
     def __repr__(self):
                 return f"Montly_Tasks()"
+
+class Weekly_Tasks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Weekly_Tasks()"
+
+class Weekly_Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Weekly_Todo()"
+
+class Daily_Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Daily_Todo()"
+
+class Future_Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Future_Todo()"
+
+class Memo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Memo()"
+
 
 
 class RegistrationForm(FlaskForm):
@@ -120,32 +166,162 @@ def internal_server_error(e):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        if 'ingredient' in request.form:
-            ingredient_name = request.form['ingredient']
-            new_ingredient = Yearly_Tasks(title=ingredient_name)
+        if 'yearlygoal' in request.form:
+            yearlygoal_name = request.form['yearlygoal']
+            new_yearlygoal = Yearly_Tasks(title=yearlygoal_name)
             # push to db
             try:
-                db.session.add(new_ingredient)
+                db.session.add(new_yearlygoal)
                 db.session.commit()
                 return redirect(url_for('index'))
             except:
-                return "There was an error adding your ingredient"
-        elif 'ingredient1' in request.form:
-            ingredient_name = request.form['ingredient1']
-            new_ingredient = Monthly_Tasks(title=ingredient_name)
-                         # push to db
+                return "There was an error adding your yearly goal"
+        elif 'monthlygoal' in request.form:
+            monthlygoal_name = request.form['monthlygoal']
+            new_monthlygoal = Monthly_Tasks(title=monthlygoal_name)
+            # push to db
             try:
-                db.session.add(new_ingredient)
+                db.session.add(new_monthlygoal)
                 db.session.commit()
                 return redirect(url_for('index'))
             except:
-                return "There was an error adding your ingredient"
+                return "There was an error adding your monthly goal"
+        elif 'weeklygoal' in request.form:
+            weeklygoal_name = request.form['weeklygoal']
+            new_weeklygoal = Weekly_Tasks(title=weeklygoal_name)
+            # push to db
+            try:
+                db.session.add(new_weeklygoal)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your weekly goal"
+        elif 'weeklytodo' in request.form:
+            weeklytodo_name = request.form['weeklytodo']
+            new_weeklytodo = Weekly_Todo(title=weeklytodo_name)
+            # push to db
+            try:
+                db.session.add(new_weeklytodo)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your weekly to-do item"
+        elif 'dailytodo' in request.form:
+            dailytodo_name = request.form['dailytodo']
+            new_dailytodo = Daily_Todo(title=dailytodo_name)
+            # push to db
+            try:
+                db.session.add(new_dailytodo)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your daily to-do item"
+        elif 'futuretodo' in request.form:
+            futuretodo_name = request.form['futuretodo']
+            new_futuretodo = Future_Todo(title=futuretodo_name)
+            # push to db
+            try:
+                db.session.add(new_futuretodo)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your future to-do item"
+        elif 'memo' in request.form:
+            memo_name = request.form['memo']
+            new_memo = Memo(title=memo_name)
 
+            try:
+                db.session.add(new_memo)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                "return there was an error adding your note"
     else:
-        ingredients = Yearly_Tasks.query.order_by(Yearly_Tasks.date_create)
-        ingredients1 = Monthly_Tasks.query.order_by(Monthly_Tasks.date_create)
-        return render_template('index.html', ingredients=ingredients, ingredients1=ingredients1)
+        yearlygoals = Yearly_Tasks.query.order_by(Yearly_Tasks.date_create)
+        monthlygoals = Monthly_Tasks.query.order_by(Monthly_Tasks.date_create)
+        weeklygoals = Weekly_Tasks.query.order_by(Weekly_Tasks.date_create)
+        weeklytodos = Weekly_Todo.query.order_by(Weekly_Todo.date_create)
+        dailytodos = Daily_Todo.query.order_by(Daily_Todo.date_create)
+        futuretodos = Future_Todo.query.order_by(Future_Todo.date_create)
+        memos = Memo.query.order_by(Memo.date_create)
+        return render_template('index.html', yearlygoals=yearlygoals, monthlygoals=monthlygoals, weeklygoals=weeklygoals, weeklytodos=weeklytodos, dailytodos=dailytodos, futuretodos=futuretodos, memos=memos)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    item_to_delete = Yearly_Tasks.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete2/<int:id>')
+def delete2(id):
+    item_to_delete = Monthly_Tasks.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete3/<int:id>')
+def delete3(id):
+    item_to_delete = Weekly_Tasks.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete4/<int:id>')
+def delete4(id):
+    item_to_delete = Weekly_Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete5/<int:id>')
+def delete5(id):
+    item_to_delete = Daily_Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete6/<int:id>')
+def delete6(id):
+    item_to_delete = Future_Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
+
+@app.route('/delete7/<int:id>')
+def delete7(id):
+    item_to_delete = Memo.query.get_or_404(id)
+
+    try:
+        db.session.delete(item_to_delete)
+        db.session.commit()
+        return redirect(url_for('index'))
+    except:
+        return "There was a problem deleting that item"
 
 
 @app.route('/register', methods=['GET', 'POST'])
