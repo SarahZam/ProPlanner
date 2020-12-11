@@ -18,7 +18,8 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///lists.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///yearlygoal.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///monthlygoal.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -32,18 +33,6 @@ moment = Moment(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-class Lists(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    weeklytask = db.Column(db.String(200), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    
-
-
-    def __repr__(self):
-        return f"Lists()"
-        # return f"Lists('{self.weeklytask}','{self.monthlytask}')"
-        # return'<Weeklytask %r' %self.id
-        # return'<Monthlytask %r' %self.id
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,28 +40,25 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
-    tasks = db.relationship('Tasks', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
-# create db Model
-class Tasks(db.Model):
-    __tablename__ = 'task'
+class Yearly_Tasks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    year_goal = db.Column(db.String(200))
-    month_goal = db.Column(db.String(200))
-    weekly_goal = db.Column(db.String(200))
-    weekly_todo = db.Column(db.String(200))
-    daily_todo = db.Column(db.String(200))
-    future_todo = db.Column(db.String(200))
-    notes =  db.Column(db.String(200))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
 
     def __repr__(self):
-            # return f"Tasks()"
-            return '<year_goal %r>' %self.id
+                return f"Yearly_Tasks()"
+
+class Monthly_Tasks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    date_create = db.Column(db.DateTime,default=datetime.utcnow)
+
+    def __repr__(self):
+                return f"Montly_Tasks()"
 
 
 class RegistrationForm(FlaskForm):
@@ -127,34 +113,35 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == "POST":
-        if 'weeklytask' in request.form:
-            weeklytask = request.form['weeklytask']
-            new_weeklytask = Lists(weeklytask=weeklytask)
-
+        if 'ingredient' in request.form:
+            ingredient_name = request.form['ingredient']
+            new_ingredient = Yearly_Tasks(title=ingredient_name)
+            # push to db
             try:
-                db.session.add(new_weeklytask)
+                db.session.add(new_ingredient)
                 db.session.commit()
-                return redirect('/')
-            except: 
-                return "There was an error adding your list item"
-        elif 'monthlytask' in request.form:
-            monthytask = request.form['monthlytask']
-            new_monthlytask = Lists(monthlytask=monthlytask)
-
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your ingredient"
+        elif 'ingredient1' in request.form:
+            ingredient_name = request.form['ingredient1']
+            new_ingredient = Monthly_Tasks(title=ingredient_name)
+                         # push to db
             try:
-                db.session.add(new_monthlytask)
+                db.session.add(new_ingredient)
                 db.session.commit()
-                return redirect('/')
-            except: 
-                return "There was an error adding your list item"
-        else: return render_template("index.html", lists=lists)
+                return redirect(url_for('index'))
+            except:
+                return "There was an error adding your ingredient"
 
     else:
-        lists = Lists.query.order_by(Lists.date_created)
-        return render_template("index.html", lists=lists)
+        ingredients = Yearly_Tasks.query.order_by(Yearly_Tasks.date_create)
+        ingredients1 = Monthly_Tasks.query.order_by(Monthly_Tasks.date_create)
+        return render_template('index.html', ingredients=ingredients, ingredients1=ingredients1)
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
