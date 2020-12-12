@@ -24,6 +24,9 @@
 
 
     <div class="container">
+
+        {% set index_url = url_for('index') %}
+
         <div class="row pb-5 mb-5 text-center justify-content-center" style="font-family: 'Cormorant', serif;">
 
 
@@ -34,7 +37,9 @@
 
                     <div class="card-body" style="font-size: 15px;">
 
-                        <form action="/" METHOD="POST">
+
+
+                        <form action="{{index_url}}" METHOD="POST">
                             <br>
                             <input type="text" placeholder="Yearly Goal" name="yearlygoal">
                             <br>
@@ -46,7 +51,8 @@
                         {% for yearlygoal in yearlygoals %}
                         <li>
                             {{ yearlygoal.title }}
-                            <a href="/delete/{{ yearlygoal.id }}" class="btn btn-default btn-sm">
+                            {% set delete_url = url_for('delete', id=yearlygoal.id) %}
+                            <a href="{{ delete_url }}" class="btn btn-default btn-sm">
                                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                         </li>
                         {% endfor %}
@@ -61,7 +67,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
 
-                        <form action="/" METHOD="POST">
+                        <form action="{{index_url}}" METHOD="POST">
                             <br>
                             <input type="text" placeholder="Monthly Goal" name="monthlygoal">
                             <br>
@@ -73,7 +79,8 @@
                         {% for monthlygoal in monthlygoals %}
                         <li>
                             {{ monthlygoal.title }}
-                            <a href="/delete2/{{ monthlygoal.id }}" class="btn btn-default btn-sm">
+                            {% set delete2_url = url_for('delete2', id=monthlygoal.id) %}
+                            <a href="{{ delete2_url }}" class="btn btn-default btn-sm">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                         </li>
                         {% endfor %}
@@ -89,7 +96,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
                     
-                            <form action="/" METHOD="POST">
+                            <form action="{{index_url}}" METHOD="POST">
                                 <br>
                                 <input type="text " placeholder="Weekly Goal" name="weeklygoal">
                                 <br>
@@ -102,7 +109,8 @@
                             {% for weeklygoal in weeklygoals %}
                             <li>
                                 {{ weeklygoal.title }}
-                                <a href="/delete3/{{ weeklygoal.id }}" class="btn btn-default btn-sm">
+                                {% set delete3_url = url_for('delete3', id=weeklygoal.id) %}
+                                <a href="{{ delete3_url }}" class="btn btn-default btn-sm">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                             </li>
                             {% endfor %}
@@ -123,7 +131,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <form action="/" METHOD="POST">
+                            <form action="{{index_url}}" METHOD="POST">
                                 <br>
                                 <input type="text " placeholder="Weekly To-Do" name="weeklytodo">
                                 <br>
@@ -135,7 +143,8 @@
                             {% for weeklytodo in weeklytodos %}
                             <li>
                                 {{ weeklytodo.title }}
-                                <a href="/delete4/{{ weeklytodo.id }}" class="btn btn-default btn-sm">
+                                {% set delete4_url = url_for('delete4', id=weeklytodo.id) %}
+                                <a href="{{ delete4_url }}" class="btn btn-default btn-sm">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                             </li>
                             {% endfor %}
@@ -154,7 +163,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <form action="/" METHOD="POST">
+                            <form action="{{index_url}}" METHOD="POST">
                                 <br>
                                 <input type="text " placeholder="Daily to-Do" name="dailytodo">
                                 <br>
@@ -166,7 +175,8 @@
                                 {% for dailytodo in dailytodos %}
                                 <li>
                                     {{ dailytodo.title }}
-                                    <a href="/delete5/{{ dailytodo.id }}" class="btn btn-default btn-sm">
+                                    {% set delete5_url = url_for('delete5', id=dailytodo.id) %}
+                                    <a href="{{ delete5_url }}" class="btn btn-default btn-sm">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                                 </li>
                                 {% endfor %}
@@ -185,7 +195,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                        <form action="/" METHOD="POST">
+                        <form action="{{index_url}}" METHOD="POST">
                             <br>
                             <input type="text " placeholder="Task" name="futuretodo">
                             <br>
@@ -196,7 +206,8 @@
                             {% for futuretodo in futuretodos %}
                             <li>
                                 {{ futuretodo.title }}
-                                <a href="/delete6/{{ futuretodo.id }}" class="btn btn-default btn-sm">
+                                {% set delete6_url = url_for('delete6', id=futuretodo.id) %}
+                                <a href="{{ delete6_url }}" class="btn btn-default btn-sm">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                             </li>
                             {% endfor %}
@@ -217,7 +228,7 @@
                     <div class="card-body" style="font-size: 15px;">
 
                         <div>
-                            <form action="/" METHOD="POST">
+                            <form action="{{index_url}}" METHOD="POST">
                                 <br>
                                 <input type="text " placeholder="Add note" name="memo">
                                 <br>
@@ -229,7 +240,8 @@
                                 {% for memo in memos %}
                                 <li>
                                     {{ memo.title }}
-                                    <a href="/delete7/{{ memo.id }}" class="btn btn-default btn-sm">
+                                    {% set delete7_url = url_for('delete7', id=memo.id) %}
+                                    <a href="{{ delete7_url }}" class="btn btn-default btn-sm">
                                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </li>
                                 </li>
                                 {% endfor %}
