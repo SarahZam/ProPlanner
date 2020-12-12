@@ -18,13 +18,7 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///monthlygoal.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///weeklylygoal.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///weeklytodo.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///dailytodo.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///futuretodo.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///memo.db'
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///yearlygoal.db'
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
