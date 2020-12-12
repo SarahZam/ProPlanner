@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-#from forms import RegistrationForm, LoginForm
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
@@ -16,8 +16,10 @@ from flask_login import LoginManager, UserMixin, login_user, current_user, logou
 from datetime import datetime
 
 app = Flask(__name__)
+application = app
 app.config['SECRET_KEY'] = 'gigliglgghv'
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
+
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
